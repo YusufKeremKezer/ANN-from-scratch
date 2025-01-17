@@ -137,7 +137,16 @@ class GradientDescent(Optimizer):
                 
                 
 class Initializer:
+    _instance=None
+    
+    def __new__(cls):
+        if cls._instance is None:
+            cls._instance = super(Initializer, cls).__new__(cls)
+        return cls._instance
+    
     def __init__(self):
+        
+        
         self.init_dict = { 
             "random": self.random_initialization,  # Initialization types stored like this because of Open Closed principle
             "he": self.he_initialization,  
